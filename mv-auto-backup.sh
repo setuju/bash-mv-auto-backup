@@ -11,6 +11,9 @@
 # Author: Jack (https://github.com/setuju, https://passwords.t.me/)
 # Repository: https://github.com/setuju/bash-mv-auto-backup
 # License: MIT
+#
+# FIX: Fixed octal interpretation of backup numbers (e.g., 008 caused error).
+#      Now using base-10 conversion with 10#$num.
 # ============================================================================
 
 # ----------------------------------------------------------------------------
@@ -157,6 +160,10 @@ mv() {
                             # Use sed to match the exact pattern and capture the number
                             local num=$(basename "$f" | sed -n "s/^${name//./\\.}${ext//./\\.}\.\([0-9]*\)\.bak$/\1/p")
                             if [[ -n "$num" && "$num" =~ ^[0-9]+$ ]]; then
+                                # FIX: Convert number from octal to decimal to avoid "value too great for base" error
+                                # Bash interprets numbers with leading zeros as octal (e.g., 008 is invalid).
+                                # Using 10#$num forces base-10 interpretation.
+                                num=$((10#$num))
                                 (( num > max )) && max=$num
                             fi
                         fi
@@ -187,6 +194,6 @@ mv() {
     fi
 }
 
-# ==============================================================================
-# End of script #SERVER is DOWN #MAINHACK BROTHERHOOD https://serverisdown.t.me/ 
+==============================================================================
+# End of script #SERVER is DOWN #MAINHACK BROTHERHOOD https://serverisdown.t.me/
 # ==============================================================================
