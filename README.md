@@ -210,6 +210,7 @@ This project is licensed under the MIT License – see the [LICENSE](LICENSE) fi
 
 * GitHub: [@setuju](https://github.com/setuju)
 * Telegram: [passwords.t.me](https://t.me/passwords.t.me)
+* dev.to: [HARD IN](https://dev.to/ggle_in)
 
 ---
 
